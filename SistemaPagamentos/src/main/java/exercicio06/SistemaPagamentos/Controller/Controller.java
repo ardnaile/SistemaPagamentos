@@ -1,8 +1,14 @@
 package exercicio06.SistemaPagamentos.Controller;
 
+import exercicio06.SistemaPagamentos.Service.PagamentoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import exercicio06.SistemaPagamentos.Models.ContaModel;
+import exercicio06.SistemaPagamentos.Service.*;
+
+
 
 @RestController
 @RequestMapping("/")
@@ -24,5 +30,70 @@ public class Controller{
         // lógica para puxar a transação,etc.
         return ResponseEntity.status(HttpStatus.OK).body(transacao);
     }
+
+    @Autowired
+    private PagamentoService pagamentoService;
+
+    @Autowired
+    private  SaldoService saldoService;
+
+    @Autowired
+    private ContaService contaService;
+
+    //Todas Contas
+    @GetMapping("")
+    public ResponseEntity<Object> verSaldo() throws Exception{
+        return ResponseEntity.status(HttpStatus.valueOf(201)).body(null);
+    };
+
+    //Somente uma Conta
+    @GetMapping("{id}")
+    public ResponseEntity<Object> verSaldo(@PathVariable("id") String id ) throws Exception{
+        return ResponseEntity.status(HttpStatus.valueOf(201)).body(null);
+    };
+
+    //Criar Conta
+    @PostMapping("criar-conta/{id}")
+    public ResponseEntity<Object> verSaldo(@RequestBody ContaModel contaModel) throws Exception{
+        try {
+            ContaModel criarConta = (ContaModel) contaService.novaConta(
+                    contaModel.getId(),
+                    contaModel.getCpf(),
+                    contaModel.getSaldo()
+            );
+            return ResponseEntity.status(HttpStatus.valueOf(201))
+                    .contentType(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE))
+                    .body(criarConta);
+
+        } catch (HttpClientErrorException.BadRequest e) {
+            return ResponseEntity.status(HttpStatus.valueOf(400))
+                    .body(ContaModel.class);
+        }
+    };
+
+    //Atualizar Conta
+    @PutMapping("/conta-up/{id}")
+    public ResponseEntity<Object> updConta(@RequestBody ContaModel contaModel) throws Exception{
+        try {
+            ContaModel updConta = (ContaModel) contaService.atualizarConta(
+                    contaModel.getId(),
+                    contaModel.getCpf(),
+                    contaModel.getSaldo()
+            );
+            return ResponseEntity.status(HttpStatus.valueOf(204))
+                    .contentType(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE))
+                    .body(updConta);
+
+        } catch (HttpClientErrorException.BadRequest e) {
+            return ResponseEntity.status(HttpStatus.valueOf(400))
+                    .body(null);
+        }
+    }
+
+    //Deletar conta
+    @DeleteMapping("{id}")
+    public ResponseEntity<Object> deleteConta(@PathVariable("id") String id ) throws Exception{
+        return ResponseEntity.status(HttpStatus.valueOf(204)).body(null);
+    };
 
 }
