@@ -1,38 +1,42 @@
-package com.backendSistemapagamento.Service;
+package exercicio06.SistemaPagamentos.Service;
 
-import com.backendSistemapagamento.Models.ContaModel;
+import exercicio06.SistemaPagamentos.Models.ContaModel;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.web.client.RestTemplate;
 
 public class ContaService {
-    public Object novaConta ( Integer id,String cpf ,Double saldo) throws Exception {
+    public Object novaConta(Integer id, String cpf, Double saldo) throws Exception {
         RestTemplate restTemplate = new RestTemplate();
 
         RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
         restTemplate = restTemplateBuilder.build();
 
-        ContaModel newConta = new ContaModel();
-        newConta.setId(id);
-        newConta.getCpf(cpf);
-        newConta.setSaldo(saldo);
+        //ContaModel newConta = new ContaModel();
+        //newConta.setId(id);
+        //newConta.getCpf(cpf);
+        //newConta.setSaldo(saldo);
 
-        ContaModel contaCriada = restTemplate.postForObject("http://localhost:8080/atualizar-saldo/", newConta, ContaModel.class);
-        return contaCriada;
+        //ContaModel contaCriada = restTemplate.postForObject("http://localhost:8080/atualizar-saldo/", newConta, ContaModel.class);
+        //return contaCriada;
+        return null;
     }
 
-    public Object atualizarConta ( Integer id,String cpf ,Double saldo) throws Exception {
+    public Object atualizarConta(Integer id, String cpf, Double saldo) throws Exception {
         RestTemplate restTemplate = new RestTemplate();
 
         RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
         restTemplate = restTemplateBuilder.build();
 
-        ContaModel atlConta = new ContaModel();
-        atlConta.setId(id);
-        atlConta.getCpf(cpf);
-        atlConta.setSaldo(saldo);
+        //ContaModel atlConta = new ContaModel();
+        //atlConta.setId(id);
+        //atlConta.getCpf(cpf);
+        //atlConta.setSaldo(saldo);
 
-        ContaModel contaCriada = restTemplate.postForObject("http://localhost:8080/atualizar-saldo/", atlConta, ContaModel.class);
-        return contaCriada;
+        //ContaModel contaCriada = restTemplate.postForObject("http://localhost:8080/atualizar-saldo/", atlConta, ContaModel.class);
+        //return contaCriada;
+        return null;
 
 
     }
+}
+

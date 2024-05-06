@@ -7,7 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import exercicio06.SistemaPagamentos.Models.ContaModel;
-import exercicio06.SistemaPagamentos.Service.
+import exercicio06.SistemaPagamentos.Service.*;
 import org.springframework.web.client.HttpClientErrorException;;
 
 
@@ -23,7 +23,7 @@ public class Controller{
 
     @Autowired
     //Mexer aqui
-    private com.backendSistemapagamento.Service.ContaService contaService;
+    private ContaService contaService;
 
     //Todas Contas
     @GetMapping("")
