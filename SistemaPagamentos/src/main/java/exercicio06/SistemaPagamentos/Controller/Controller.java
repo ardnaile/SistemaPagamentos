@@ -3,34 +3,18 @@ package exercicio06.SistemaPagamentos.Controller;
 import exercicio06.SistemaPagamentos.Service.PagamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import exercicio06.SistemaPagamentos.Models.ContaModel;
-import exercicio06.SistemaPagamentos.Service.*;
+import exercicio06.SistemaPagamentos.Service.
+import org.springframework.web.client.HttpClientErrorException;;
 
 
 
 @RestController
 @RequestMapping("/")
 public class Controller{
-    @PostMapping("/transacoes")
-    public ResponseEntity<Object> criarTransacao(@RequestBody Transacao transacao) { // depois será criado um model Transacao para esse objeto
-        // lógica de criação de transação, etc.
-        return ResponseEntity.status(HttpStatus.CREATED).body(null);
-    }
-
-    @GetMapping("/transacoes")
-    public ResponseEntity<List<Transacao>> visualizarTodasTransacoes() {
-        // lógica para puxar a lista de transações, etc.
-        return ResponseEntity.status(HttpStatus.OK).body(ListaTransacoes);
-    }
-
-    @GetMapping("/transacoes/{transacaoId}")
-    public ResponseEntity<Transacao> visualizarTransacao(@PathVariable int transacaoId) {
-        // lógica para puxar a transação,etc.
-        return ResponseEntity.status(HttpStatus.OK).body(transacao);
-    }
-
     @Autowired
     private PagamentoService pagamentoService;
 
@@ -38,7 +22,8 @@ public class Controller{
     private  SaldoService saldoService;
 
     @Autowired
-    private ContaService contaService;
+    //Mexer aqui
+    private com.backendSistemapagamento.Service.ContaService contaService;
 
     //Todas Contas
     @GetMapping("")
@@ -67,7 +52,7 @@ public class Controller{
 
         } catch (HttpClientErrorException.BadRequest e) {
             return ResponseEntity.status(HttpStatus.valueOf(400))
-                    .body(ContaModel.class);
+                    .body(null);
         }
     };
 
@@ -82,7 +67,7 @@ public class Controller{
             );
             return ResponseEntity.status(HttpStatus.valueOf(204))
                     .contentType(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE))
-                    .body(updConta);
+                    .body(null);
 
         } catch (HttpClientErrorException.BadRequest e) {
             return ResponseEntity.status(HttpStatus.valueOf(400))
@@ -95,5 +80,24 @@ public class Controller{
     public ResponseEntity<Object> deleteConta(@PathVariable("id") String id ) throws Exception{
         return ResponseEntity.status(HttpStatus.valueOf(204)).body(null);
     };
+
+
+    @PostMapping("/transacoes")
+    public ResponseEntity<Object> criarTransacao(@RequestBody Transacao transacao) { // depois será criado um model Transacao para esse objeto
+        // lógica de criação de transação, etc.
+        return ResponseEntity.status(HttpStatus.CREATED).body(null);
+    }
+
+    @GetMapping("/transacoes")
+    public ResponseEntity<List<Transacao>> visualizarTodasTransacoes() {
+        // lógica para puxar a lista de transações, etc.
+        return ResponseEntity.status(HttpStatus.OK).body(ListaTransacoes);
+    }
+
+    @GetMapping("/transacoes/{transacaoId}")
+    public ResponseEntity<Transacao> visualizarTransacao(@PathVariable int transacaoId) {
+        // lógica para puxar a transação,etc.
+        return ResponseEntity.status(HttpStatus.OK).body(transacao);
+    }
 
 }

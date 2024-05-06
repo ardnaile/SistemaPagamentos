@@ -7,6 +7,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class PagamentoService {
     public Object atualizarSaldos ( String conta_id, Double saldo) throws Exception {
+    /*
     RestTemplate restTemplate = new RestTemplate();
 
     RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
@@ -16,8 +17,12 @@ public class PagamentoService {
         atualizarSaldo.setConta_id(conta_id);
         atualizarSaldo.setSaldo(saldo);
 
+
+
     ContaModel saldoAtualizado = restTemplate.postForObject("http://localhost:8080/atualizar-saldo/", atualizarSaldo, ContaModel.class);
-        return saldoAtualizado;
+
+        */
+        return null;
     }
 
 }

@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class SaldoService {
     public Object mostraSaldo(String conta_id) {
+        /*
         RestTemplate restTemplate = new RestTemplate();
 
         RestTemplateBuilder restTemplateBuilder = new RestTemplateBuilder();
@@ -18,7 +19,8 @@ public class SaldoService {
 
 
         ContaModel saldoConta = restTemplate.postForObject("http://localhost:9000/listarprodutos/",saldos ,ContaModel.class);
-        return saldoConta;
+        */
+        return null;
     }
 
 }
